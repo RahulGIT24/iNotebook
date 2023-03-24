@@ -1,14 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); // Impoting mongoose
 
-const mongoURI = "mongodb://localhost:27017";
+const mongoURI = "mongodb://localhost:27017/iNotebook" // iNotebook database URL
 
-const connectToMongo = async() => {
-    try {
-        await mongoose.connect(mongoURI)
-        console.log("Connected to mongo")
-    } catch (e) {
-        console.log(e)
-    }
+// Connecting to databse
+const connectToMongo = () => {
+    mongoose.connect(mongoURI, () => {
+        console.log("Connected to Mongo Successfully");
+    })
 }
 
-module.exports = connectToMongo;
+module.exports = connectToMongo; // Exporting connectToMongo function
