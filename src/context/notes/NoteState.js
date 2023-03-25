@@ -59,7 +59,7 @@ const NoteState = (props) => {
   };
 
   // Edit a note
-  const editNote = async (id,title, description, tag) => {
+  const editNote = async (id, title, description, tag) => {
     // API Call
 
     let url = `${host}/api/notes/updatenote/6419b33e1a8718ecbbce4ad4`;
