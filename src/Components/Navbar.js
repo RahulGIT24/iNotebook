@@ -1,10 +1,14 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
-function Navbar() {
-
+function Navbar(props) {
+    const {renderAlert} = props;
     // useLocation hook to set active status of navbar
     let location = useLocation();
-
+    const logout =()=>{
+        localStorage.clear("token")
+        renderAlert("primary","Logout Successfully")
+        // location.reload();
+    }
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -22,10 +26,10 @@ function Navbar() {
                                 <Link className={`nav-link ${location.pathname === "/about" ? "active" : ""}`} to="/about">About</Link>
                             </li>
                         </ul>
-                        <form className="d-flex" role="search">
+                        {!localStorage.getItem("token")? <form className="d-flex" role="search">
                         <Link className="btn btn-primary mx-2" to="/login" role="button">Login</Link>
                         <Link className="btn btn-primary" to="/signup" role="button">Sign Up</Link>
-                        </form>
+                        </form>:<Link className="btn btn-primary mx-2" to="/login" role="button" onClick={logout}>Log Out</Link>}
                     </div>
                 </div>
             </nav>

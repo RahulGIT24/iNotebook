@@ -22,7 +22,7 @@ function App() {
   return (
     <NoteState>
       <Router>
-        <Navbar />
+        <Navbar renderAlert={renderAlert}/>
         <Alert alert={alert} />
         <div className="container">
           <Routes>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = (props) => {
-  const {renderAlert} = props;
+  const { renderAlert } = props;
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
 
@@ -23,10 +23,10 @@ const Login = (props) => {
     if (json.success) {
       //* Save the auth token and redirect
       localStorage.setItem("token", json.authtoken);
+      renderAlert("success", "Login Success");
       navigate("/");
-      renderAlert("success","Login Success")
     } else {
-      renderAlert("danger","Invalid Credentials")
+      renderAlert("danger", "Invalid Credentials");
     }
   };
 
@@ -69,7 +69,7 @@ const Login = (props) => {
         </div>
 
         <button type="submit" className="btn btn-primary">
-          Submit
+          Login
         </button>
       </form>
     </div>

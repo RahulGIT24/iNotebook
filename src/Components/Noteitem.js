@@ -7,6 +7,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 function NoteItem(props) {
+  const {renderAlert} = props;
   const context = useContext(contextValue);
   const { deleteNote } = context;
   const { note, updateNote } = props;
@@ -23,6 +24,7 @@ function NoteItem(props) {
               className="mx-2"
               onClick={() => {
                 deleteNote(note._id);
+                renderAlert("danger","Note deleted successfully")
               }}
             />
           </i>
