@@ -129,6 +129,11 @@ function NoteItem() {
                 Close
               </button>
               <button
+                disabled={
+                  note.etitle.length < 5 ||
+                  note.edescription.length < 5 ||
+                  note.etag.length < 5
+                }
                 type="button"
                 className="btn btn-primary"
                 onClick={handleClick}
