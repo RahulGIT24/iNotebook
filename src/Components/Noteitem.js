@@ -9,7 +9,7 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 function NoteItem(props) {
   const context = useContext(contextValue);
   const { deleteNote } = context;
-  const { note } = props;
+  const { note, updateNote } = props;
   return (
     <div className="col-md-3">
       <div className="card my-3">
@@ -27,7 +27,12 @@ function NoteItem(props) {
             />
           </i>
           <i>
-            <FontAwesomeIcon icon={faPenToSquare} />
+            <FontAwesomeIcon
+              icon={faPenToSquare}
+              onClick={() => {
+                updateNote(note);
+              }}
+            />
           </i>
         </div>
       </div>

@@ -62,27 +62,29 @@ const NoteState = (props) => {
   const editNote = async (id, title, description, tag) => {
     // API Call
 
-    let url = `${host}/api/notes/updatenote/6419b33e1a8718ecbbce4ad4`;
+    let url = `${host}/api/notes/updatenote/${id}`;
     const response = await fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQxZWMzZWViNGZhY2U5YTZmY2JhNGEyIn0sImlhdCI6MTY3OTczNzgzOH0.7iGPwnbuOTWaBuW_AjqmoTdjrkSRz191ULX4cxn4Xkg",
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQxZWMzZWViNGZhY2U5YTZmY2JhNGEyIn0sImlhdCI6MTY3OTczNzg3N30.1yPLZ8apfDxG9I5O-Po_WWden27o9xyTC7wBQsG8JUU",
       },
-      body: JSON.stringify(title, description, tag),
+      body: JSON.stringify({ title, description, tag }),
     });
+    // eslint-disable-next-line
     const json = response.json();
 
     // Logic to edit note
     for (let index = 0; index < notes.length; index++) {
       const element = notes[index];
       if (element.id === id) {
-        element.title = title;
-        element.description = description;
-        element.tag = tag;
+        notes[index].title = title;
+        notes[index].description = description;
+        notes[index].tag = tag;
       }
     }
+    getNote();
   };
 
   return (
