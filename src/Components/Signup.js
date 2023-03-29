@@ -2,7 +2,10 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import contextValue from "../context/darkmode/darkContext";
 function Signup(props) {
+<<<<<<< HEAD
   const context = useContext(contextValue);
+=======
+>>>>>>> 2421bb1 (Modified Signup)
   const { renderAlert } = props;
   const [credentials, setCredentials] = useState({
     name: "",
@@ -12,6 +15,7 @@ function Signup(props) {
   });
 
   let navigate = useNavigate();
+  const { name, email, password, cpassword } = credentials;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -101,12 +105,23 @@ function Signup(props) {
           />
         </div>
         <button
+<<<<<<< HEAD
           type="submit"
           className={`btn btn-${
             context.mode === "light" ? "primary" : "light"
           } mx-2 bg-${
             context.mode === "light" ? "primary" : "dark"
           } text-light`}
+=======
+          disabled={
+            password.length !== cpassword.length ||
+            name === "" ||
+            email === "" ||
+            password === ""
+          }
+          type="submit"
+          className="btn btn-primary"
+>>>>>>> 2421bb1 (Modified Signup)
         >
           Sign Up
         </button>
