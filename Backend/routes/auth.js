@@ -5,8 +5,8 @@ const { body, validationResult } = require("express-validator"); // Importing ex
 const bcrypt = require("bcryptjs"); // Importing bcrypt js
 var jwt = require("jsonwebtoken"); // Importing JWT
 var fetchuser = require("../middleware/fetchuser"); // Importing fetchuser middleware
-
-const JWT_SECRET = "Rahulisagoodb$oy"; // JWT Secret key
+const key = require("../key/config"); // Fetching Secret key from config file
+const JWT_SECRET = key; // JWT Secret key
 
 //* ROUTE 1: Create a User using: POST "/api/auth/createuser". No login required
 
@@ -25,7 +25,7 @@ router.post(
     // If there are errors, return Bad request and the errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ success,errors: errors.array() });
+      return res.status(400).json({ success, errors: errors.array() });
     }
     try {
       // Check whether the user with this email exists already
@@ -33,7 +33,10 @@ router.post(
       if (user) {
         return res
           .status(400)
-          .json({ success,error: "Sorry a user with this email already exists" });
+          .json({
+            success,
+            error: "Sorry a user with this email already exists",
+          });
       }
       const salt = await bcrypt.genSalt(10); // Generating a salt
       const secPass = await bcrypt.hash(req.body.password, salt); // Generating a hash password
@@ -51,7 +54,7 @@ router.post(
       };
       const authtoken = jwt.sign(data, JWT_SECRET); // Signing JWT key
       success = true;
-      res.json({ success,authtoken }); // sending authtoken in response
+      res.json({ success, authtoken }); // sending authtoken in response
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error"); // In case of errors
@@ -89,12 +92,10 @@ router.post(
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
         success = false;
-        return res
-          .status(400)
-          .json({
-            success,
-            error: "Please try to login with correct credentials",
-          });
+        return res.status(400).json({
+          success,
+          error: "Please try to login with correct credentials",
+        });
       }
 
       const data = {

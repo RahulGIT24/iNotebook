@@ -1,5 +1,7 @@
 var jwt = require("jsonwebtoken"); // Importing json web token
-const JWT_SECRET = "Rahulisagoodb$oy"; // JWT Secret key
+const key = require("../key/config") // Importing jwt secret key from config file
+
+const JWT_SECRET = key; // JWT Secret key
 
 const fetchuser = (req, res, next) => {
   // Get the user from the jwt token and add id to req object
