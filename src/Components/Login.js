@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
+import contextValue from "../context/darkmode/darkContext";
 const Login = (props) => {
+  const context = useContext(contextValue);
   const { renderAlert } = props;
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
@@ -68,7 +69,14 @@ const Login = (props) => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className={`btn btn-${
+            context.mode === "light" ? "primary" : "light"
+          } mx-2 bg-${
+            context.mode === "light" ? "primary" : "dark"
+          } text-light`}
+        >
           Login
         </button>
       </form>

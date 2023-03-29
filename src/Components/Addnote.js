@@ -1,8 +1,11 @@
 import React, { useContext, useState } from "react";
 import contextValue from "../context/notes/noteContext";
+import contextValue1 from "../context/darkmode/darkContext";
 
 const AddNote = (props) => {
-  const {renderAlert} = props;
+  const context1 = useContext(contextValue1);
+  const { mode } = context1;
+  const { renderAlert } = props;
   const context = useContext(contextValue);
   const { addNote } = context;
 
@@ -12,7 +15,7 @@ const AddNote = (props) => {
     e.preventDefault();
     addNote(note.title, note.description, note.tag);
     setNote({ title: "", description: "", tag: "" });
-    renderAlert("success","Note Added Successfully")
+    renderAlert("success", "Note Added Successfully");
   };
 
   const onChange = (e) => {
@@ -76,7 +79,9 @@ const AddNote = (props) => {
             note.tag.length < 5
           }
           type="submit"
-          className="btn btn-primary"
+          className={`btn btn-${
+            mode === "light" ? "primary" : "light"
+          } mx-2 bg-${mode === "light" ? "primary" : "dark"} text-light`}
           onClick={handleClick}
         >
           Add Note

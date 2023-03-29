@@ -63,7 +63,7 @@ router.put('/updatenote/:id', fetchuser, async (req, res) => {
         if (!note) { return res.status(404).send('Not found') }
 
         // if user's id and id of user in note is different
-        if (note.user.toString() != req.user.id) { return res.status(401).send('Not Allowed') }
+        if (note.user.toString() !== req.user.id) { return res.status(401).send('Not Allowed') }
 
         // Setting new note
         note = await Note.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true })
@@ -87,7 +87,7 @@ router.delete('/deletenote/:id', fetchuser, async (req, res) => {
         if (!note) { return res.status(404).send('Not found') }
 
         // if user's id and id of user in note is different
-        if (note.user.toString() != req.user.id) { return res.status(401).send('Not Allowed') }
+        if (note.user.toString() !== req.user.id) { return res.status(401).send('Not Allowed') }
 
         // Deleting a note
         note = await Note.findByIdAndDelete(req.params.id)

@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import contextValue from "../context/notes/noteContext";
+import contextValue1 from "../context/darkmode/darkContext";
 import Noteitem from "./Noteitem";
 import Addnote from "./Addnote";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 function Notes(props) {
   const {renderAlert} = props;
   const context = useContext(contextValue);
+  const context1 = useContext(contextValue1);
   const { notes, getNote, editNote } = context;
   let navigate = useNavigate();
   useEffect(() => {
@@ -65,7 +67,7 @@ function Notes(props) {
         aria-hidden="true"
       >
         <div className="modal-dialog">
-          <div className="modal-content">
+          <div className={`modal-content bg-${context1.mode}`}>
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="exampleModalLabel">
                 Edit Note
@@ -143,7 +145,11 @@ function Notes(props) {
                   note.etag.length < 5
                 }
                 type="button"
-                className="btn btn-primary"
+                className={`btn btn-${
+                  context1.mode === "light" ? "primary" : "light"
+                } mx-2 bg-${
+                  context1.mode === "light" ? "primary" : "dark"
+                } text-light`}
                 onClick={handleClick}
               >
                 Update Note
