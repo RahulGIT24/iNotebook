@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import contextValue from "../context/darkmode/darkContext";
 function Signup(props) {
-  const {renderAlert} = props;
+  const context = useContext(contextValue);
+  const { renderAlert } = props;
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -27,13 +29,13 @@ function Signup(props) {
     });
     const json = await response.json();
     console.log(json);
-    if(json.success){
-    //* Save the auth token and redirect
-    localStorage.setItem("token", json.authtoken);
-    navigate("/");
-    renderAlert("success","Account Created Successfully");
-    }else{
-      renderAlert("danger","User already exist");
+    if (json.success) {
+      //* Save the auth token and redirect
+      localStorage.setItem("token", json.authtoken);
+      navigate("/");
+      renderAlert("success", "Account Created Successfully");
+    } else {
+      renderAlert("danger", "User already exist");
     }
   };
 
@@ -98,7 +100,14 @@ function Signup(props) {
             name="cpassword"
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className={`btn btn-${
+            context.mode === "light" ? "primary" : "light"
+          } mx-2 bg-${
+            context.mode === "light" ? "primary" : "dark"
+          } text-light`}
+        >
           Sign Up
         </button>
       </form>
