@@ -1,36 +1,36 @@
 import { useState } from "react";
 import NoteContext from "./noteContext";
+import api_address from "../api/config";
+
+const { fetchNote, deleteNotes, updateNote, addNotes } = api_address;
 
 const NoteState = (props) => {
-  let host = "http://localhost:5000";
   const notesInitial = [];
   const [notes, setNotes] = useState(notesInitial);
 
   // Fetch all notes
   const getNote = async () => {
-    let url = `${host}/api/notes/fetchallnotes`;
+    let url = fetchNote;
     const response = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          localStorage.getItem("token"),
+        "auth-token": localStorage.getItem("token"),
       },
     });
     const json = await response.json();
-    // console.log(json);
+    // console.log(json,fetchNote);
     setNotes(json);
   };
 
   // Add a Note
   const addNote = async (title, description, tag) => {
     // API Call
-    const response = await fetch(`${host}/api/notes/addnote`, {
+    const response = await fetch(addNotes, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          localStorage.getItem("token"),
+        "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({ title, description, tag }),
     });
@@ -40,13 +40,12 @@ const NoteState = (props) => {
 
   // Delete a note
   const deleteNote = async (id) => {
-    let url = `${host}/api/notes/deletenote/${id}`;
+    let url = `${deleteNotes}${id}`;
     const response = await fetch(url, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          localStorage.getItem("token"),
+        "auth-token": localStorage.getItem("token"),
       },
     });
     const json = await response.json();
@@ -62,13 +61,12 @@ const NoteState = (props) => {
   const editNote = async (id, title, description, tag) => {
     // API Call
 
-    let url = `${host}/api/notes/updatenote/${id}`;
+    let url = `${updateNote}${id}`;
     const response = await fetch(url, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token":
-          localStorage.getItem("token"),
+        "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({ title, description, tag }),
     });
