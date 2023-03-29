@@ -1,12 +1,15 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import contextValue from "../context/darkmode/darkContext";
+import api_address from "../context/api/config"
+
 function Signup(props) {
 <<<<<<< HEAD
   const context = useContext(contextValue);
 =======
 >>>>>>> 2421bb1 (Modified Signup)
   const { renderAlert } = props;
+  const {signup} = api_address;
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -20,7 +23,7 @@ function Signup(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, password } = credentials;
-    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+    const response = await fetch(signup, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

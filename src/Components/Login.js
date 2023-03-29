@@ -1,15 +1,18 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import contextValue from "../context/darkmode/darkContext";
+import api_address from "../context/api/config"
+
 const Login = (props) => {
   const context = useContext(contextValue);
   const { renderAlert } = props;
+  const {login} = api_address;
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/login", {
+    const response = await fetch(login, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
