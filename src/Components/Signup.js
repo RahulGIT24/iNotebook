@@ -4,12 +4,9 @@ import contextValue from "../context/darkmode/darkContext";
 import api_address from "../context/api/config"
 
 function Signup(props) {
-<<<<<<< HEAD
   const context = useContext(contextValue);
-=======
->>>>>>> 2421bb1 (Modified Signup)
   const { renderAlert } = props;
-  const {signup} = api_address;
+  const { signup } = api_address;
   const [credentials, setCredentials] = useState({
     name: "",
     email: "",
@@ -107,15 +104,11 @@ function Signup(props) {
             name="cpassword"
           />
         </div>
-        <button
-<<<<<<< HEAD
+        <button>
           type="submit"
-          className={`btn btn-${
-            context.mode === "light" ? "primary" : "light"
-          } mx-2 bg-${
-            context.mode === "light" ? "primary" : "dark"
-          } text-light`}
-=======
+          className={`btn btn-${context.mode === "light" ? "primary" : "light"
+            } mx-2 bg-${context.mode === "light" ? "primary" : "dark"
+            } text-light`}
           disabled={
             password.length !== cpassword.length ||
             name === "" ||
@@ -124,8 +117,6 @@ function Signup(props) {
           }
           type="submit"
           className="btn btn-primary"
->>>>>>> 2421bb1 (Modified Signup)
-        >
           Sign Up
         </button>
       </form>
