@@ -1,6 +1,7 @@
 const mongoose = require("mongoose"); // Impoting mongoose
+const connect = require('./config')
 
-const mongoURI = "mongodb://localhost:27017/iNotebook"; // iNotebook database URL
+const mongoURI = connect; // iNotebook database URL
 
 // Connecting to databse
 const connectToMongo = () => {

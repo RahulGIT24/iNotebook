@@ -104,24 +104,28 @@ function Signup(props) {
             name="cpassword"
           />
         </div>
-        <button>
-          type="submit"
-          className={`btn btn-${context.mode === "light" ? "primary" : "light"
-            } mx-2 bg-${context.mode === "light" ? "primary" : "dark"
-            } text-light`}
-          disabled={
+        <button className={`btn btn-${context.mode === "light" ? "primary" : "light"
+          } mx-2 bg-${context.mode === "light" ? "primary" : "dark"
+          } text-light`} type="submit" disabled={
             password.length !== cpassword.length ||
             name === "" ||
             email === "" ||
             password === ""
-          }
-          type="submit"
-          className="btn btn-primary"
+          }>
           Sign Up
         </button>
       </form>
     </div>
   );
 }
+
+// type="submit"
+
+//           disabled={
+//             password.length !== cpassword.length ||
+//             name === "" ||
+//             email === "" ||
+//             password === ""
+//           }
 
 export default Signup;

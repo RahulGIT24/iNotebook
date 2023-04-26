@@ -81,7 +81,7 @@ router.post(
 
     const { email, password } = req.body; // Fetching email and password from body
     try {
-      let user = await User.findOne({ email }); // Fincding user by email
+      let user = await User.findOne({ email }); // Finding user by email
       // If credentials are wrong
       if (!user) {
         success = false;
